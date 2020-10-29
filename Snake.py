@@ -1,4 +1,4 @@
-import pygame,random,os
+import pygame,random,os,sys
 
 pygame.init()  #it initialise all the modules in pygame
 pygame.mixer.init()
@@ -58,12 +58,12 @@ def text_on_screen(text,color,x,y,f):
 def pause():
     text_on_screen("Paused",orange,450,30,None)
     pygame.display.update()
-    pausemusic()
+    pygame.mixer.music.pause()
     while(True):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key== pygame.K_SPACE:
-                    unpausemusic()
+                    pygame.mixer.music.unpause()
                     return
             if event.type == pygame.QUIT:
                 return True
@@ -87,7 +87,7 @@ def welcome():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit_game = True
-                quit()
+                sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     playmusic()
@@ -128,7 +128,7 @@ def gameLoop():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit_game=True
-                    quit()
+                    sys.exit()
                 if event.type==pygame.KEYDOWN:
                     if event.key==pygame.K_RETURN:
                         welcome()
@@ -136,7 +136,7 @@ def gameLoop():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit_game=True
-                    quit()
+                    sys.exit()
                     pygame.mixer.music.stop()
 
                 if event.type == pygame.KEYDOWN:
@@ -219,4 +219,4 @@ def gameLoop():
         clock.tick(fps)
 welcome()
 pygame.quit()
-quit()
+sys.exit()
